@@ -5,9 +5,9 @@ namespace MoviesAPI.Repository
     public interface IMoviesRepository
     {
         public List<Movie> GetAllMovies();
-        public Movie GetMovieId(int id);
-        public void AddMovie(Movie movie);
-        public void UpdateMovie(Movie movie);
+        public Movie GetMovieById(int id);
+        public int AddMovie(MovieRequest movie);
+        public void UpdateMovie(int movieId, MovieRequest movie);
         public void DeleteMovie(int id);
     }
 }

@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using MoviesAPI.Repository;
-using MoviesAPI.Server;
 
 namespace MoviesAPI.Controller
 {
@@ -24,19 +21,19 @@ namespace MoviesAPI.Controller
             return _movieService.GetMovieById(id);
         }
 
-        public void HandlePostRequest(Movie movie)
+        public int HandlePostRequest(MovieRequest movie)
         {
-            _movieService.AddMovie(movie);
+            return _movieService.AddMovie(movie);
         }
 
-        public Response HandlePutRequest()
+        public Movie HandlePutRequest(int movieId, MovieRequest movie)
         {
-            throw new NotImplementedException();
+            return _movieService.UpdateMovie(movieId, movie);
         }
 
-        public Response HandleDeleteRequest()
+        public void HandleDeleteRequest(int movieId)
         {
-            throw new NotImplementedException();
+            _movieService.DeleteMovie(movieId);
         }
     }
 }

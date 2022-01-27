@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
-using MoviesAPI.Controller;
 using MoviesAPI.Repository;
 using MoviesAPI.Server;
 
-namespace MoviesAPI
+namespace MoviesAPI.Controller
 {
     public class MovieService : IMovieService
     {
@@ -41,12 +39,23 @@ namespace MoviesAPI
 
         public Movie GetMovieById(int id)
         {
-            return _repository.GetMovieId(id);
+            return _repository.GetMovieById(id);
         }
 
-        public void AddMovie(Movie movie)
+        public int AddMovie(MovieRequest movie)
         {
-            _repository.AddMovie(movie);
+            return _repository.AddMovie(movie);
+        }
+
+        public Movie UpdateMovie(int movieId, MovieRequest movie)
+        {
+            _repository.UpdateMovie(movieId, movie);
+            return GetMovieById(movieId);
+        }
+
+        public void DeleteMovie(int id)
+        {
+            _repository.DeleteMovie(id);
         }
     }
 }

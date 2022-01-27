@@ -6,6 +6,8 @@ namespace MoviesAPI.Controller
     {
         public List<Movie> GetAllMovies();
         Movie GetMovieById(int id);
-        void AddMovie(Movie movie);
+        int AddMovie(MovieRequest movie);
+        public Movie UpdateMovie(int movieId, MovieRequest movie);
+        public void DeleteMovie(int id);
     }
 }

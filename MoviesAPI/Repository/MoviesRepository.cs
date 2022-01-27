@@ -5,7 +5,7 @@ namespace MoviesAPI.Repository
     public class MoviesRepository : IMoviesRepository
     {
         private List<Movie> Movies { get; }
-        private readonly int _counter;
+        private int _counter;
         
         public MoviesRepository()
         {
@@ -27,19 +27,21 @@ namespace MoviesAPI.Repository
             return Movies;
         }
         
-        public Movie GetMovieId(int id)
+        public Movie GetMovieById(int id)
         {
             return Movies.Find(m => m.Id == id);
         }
         
-        public void AddMovie(Movie movie)
+        public int AddMovie(MovieRequest movie)
         {
-            Movies.Add(movie);
+            var newMovie = new Movie(++_counter, movie.Title);
+            Movies.Add(newMovie);
+            return _counter;
         }
         
-        public void UpdateMovie(Movie movie)
+        public void UpdateMovie(int id, MovieRequest movie)
         {
-            var movieToUpdate = GetMovieId(movie.Id);
+            var movieToUpdate = GetMovieById(id);
             movieToUpdate.Title = movie.Title;
         }
 
