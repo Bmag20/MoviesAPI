@@ -14,24 +14,6 @@ namespace MoviesAPI.Controller
             _repository = repository;
         }
 
-        public string ProcessRequest(Request request)
-        {
-            Console.WriteLine("Processing request: " +request.Method + " " + request.Url);
-            if (request.Method == "GET")
-            {
-                var movies = _repository.GetAllMovies();
-                var moviesString = "";
-                foreach (var movie in movies)
-                {
-                    moviesString += movie.Title + ",";
-                }
-                moviesString.Trim(',');
-                return moviesString;
-            }
-
-            return "Method not supported";
-        }
-
         public List<Movie> GetAllMovies()
         {
             return _repository.GetAllMovies();
