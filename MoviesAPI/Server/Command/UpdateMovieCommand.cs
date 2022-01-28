@@ -19,7 +19,7 @@ namespace MoviesAPI.Server.Command
                 if(int.TryParse(request.segments[2], out int movieId))
                 {
                     var movieRequest = JsonSerializer.Deserialize<MovieRequest>(request.Body);
-                    var updatedMovie = _controller.HandlePutRequest(movieId, movieRequest);
+                    var updatedMovie = _controller.UpdateMovie(movieId, movieRequest);
                     return new Response(200, JsonSerializer.Serialize(updatedMovie));
                 }
                 return new Response(400, "Bad Request - movie id is not a number");

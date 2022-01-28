@@ -18,7 +18,7 @@ namespace MoviesAPI.Server.Command
             {
                 if(int.TryParse(request.segments[2], out int movieId))
                 {
-                    _controller.HandleDeleteRequest(movieId);
+                    _controller.DeleteMovie(movieId);
                     return new Response(200, "Movie deleted");
                 }
                 return new Response(400, "Bad Request - movie id is not a number");

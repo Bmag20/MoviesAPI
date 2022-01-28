@@ -15,7 +15,7 @@ namespace MoviesAPI.Server.Command
         public Response Execute(Request request)
         {
             var movieRequest = JsonSerializer.Deserialize<MovieRequest>(request.Body);
-            var id = _controller.HandlePostRequest(movieRequest);
+            var id = _controller.AddMovie(movieRequest);
             return new Response(201,  $"{id} created");
         }
     }

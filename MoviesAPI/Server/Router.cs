@@ -2,6 +2,7 @@ using System;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using MoviesAPI.Controller;
+using MoviesAPI.Repository;
 using MoviesAPI.Server.Command;
 
 namespace MoviesAPI.Server
@@ -9,10 +10,10 @@ namespace MoviesAPI.Server
     public class Router
     {
         private readonly Request _request;
-        private readonly IMovieService _movieService;
+        private readonly IMoviesRepository _movieService;
         private ICommand _command;
 
-        public Router(Request request, IMovieService movieService)
+        public Router(Request request, IMoviesRepository movieService)
         {
             _request = request;
             _movieService = movieService;

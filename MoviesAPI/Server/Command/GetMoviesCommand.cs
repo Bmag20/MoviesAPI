@@ -16,13 +16,13 @@ namespace MoviesAPI.Server.Command
         {
             if (request.Url == "movies")
             {
-                var movies = _controller.HandleGetAllRequest();
+                var movies = _controller.GetAllMovies();
                 return new Response(200, JsonSerializer.Serialize(movies));
             }
 
             if (!int.TryParse(request.segments[2], out int movieId))
                 return new Response(400, "Bad Request - movie id is not a number");
-            var movie = _controller.HandleGetByIdRequest(movieId);
+            var movie = _controller.GetMovieById(movieId);
             return new Response(200, JsonSerializer.Serialize(movie));
         }
     }
