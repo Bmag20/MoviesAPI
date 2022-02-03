@@ -14,7 +14,7 @@ namespace MoviesAPITests
         public void Route_ShouldReturnResponseWithStatusCode200_WhenRequestIsValidGet()
         {
             // Arrange
-            IMoviesService testRepo = new TestRepository(Movies);
+            var testRepo = new DapperService("Data Source=Movies.Test");
             Request request = new Request("GET", "/movies", null);
             var router = new Router(request, testRepo);
             // Act

@@ -25,7 +25,7 @@ namespace MoviesAPI.Repository
             }
 
             connection.Execute("Create Table Movies (" +
-                               "Id INT AUTO_INCREMENT," +
+                               "Id INTEGER PRIMARY KEY AUTOINCREMENT," +
                                "Title VARCHAR(100) NOT NULL);");
             connection.Execute("INSERT INTO Movies (Title)" +
                                "VALUES ('Thor');");            

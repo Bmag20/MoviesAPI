@@ -10,7 +10,7 @@ namespace MoviesAPI
             HttpListener httpListener = new HttpListener();
             httpListener.Prefixes.Add("http://localhost:5001/");
             // MoviesRepository moviesRepository = new MoviesRepository();
-             var moviesRepository = new DapperService();
+             var moviesRepository = new DapperService("Data Source=Movies.SQLite");
             Server.Server server = new Server.Server(httpListener, moviesRepository);
             server.Start();
         }
