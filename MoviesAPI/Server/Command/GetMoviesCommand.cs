@@ -1,5 +1,7 @@
+using System;
 using System.Text.Json;
 using MoviesAPI.Controller;
+using MoviesAPI.Exceptions;
 
 namespace MoviesAPI.Server.Command
 {
@@ -20,10 +22,20 @@ namespace MoviesAPI.Server.Command
                 return new Response(200, JsonSerializer.Serialize(movies));
             }
 
-            if (!int.TryParse(request.segments[2], out int movieId))
+            try
+            {
+                var movieId = int.Parse(request.segments[2]);
+                var movie = _controller.GetMovieById(movieId);
+                return new Response(200, JsonSerializer.Serialize(movie));
+            }
+            catch (FormatException e)
+            {
                 return new Response(400, "Bad Request - movie id is not a number");
-            var movie = _controller.GetMovieById(movieId);
-            return new Response(200, JsonSerializer.Serialize(movie));
+            }
+            catch(MovieNotFoundException e)
+            {
+                return new Response(400, e.Message);
+            }
         }
     }
 }

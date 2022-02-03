@@ -1,6 +1,5 @@
 using System;
 using System.Net;
-using MoviesAPI.Controller;
 using MoviesAPI.Repository;
 
 namespace MoviesAPI.Server
@@ -9,9 +8,9 @@ namespace MoviesAPI.Server
     {
         private readonly HttpListener _listener;
         private HttpListenerContext _context;
-        private readonly IMoviesRepository _movieService;
+        private readonly IMoviesService _movieService;
 
-        public Server(HttpListener httpListener, IMoviesRepository movieService)
+        public Server(HttpListener httpListener, IMoviesService movieService)
         {
             _listener = httpListener;
             _movieService = movieService;

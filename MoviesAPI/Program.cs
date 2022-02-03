@@ -1,5 +1,4 @@
 using System.Net;
-using MoviesAPI.Controller;
 using MoviesAPI.Repository;
 
 namespace MoviesAPI
@@ -10,8 +9,8 @@ namespace MoviesAPI
         {
             HttpListener httpListener = new HttpListener();
             httpListener.Prefixes.Add("http://localhost:5001/");
-            MoviesRepository moviesRepository = new MoviesRepository();
-           // IMovieService movieService = new MovieService(moviesRepository);
+            // MoviesRepository moviesRepository = new MoviesRepository();
+             var moviesRepository = new DapperService();
             Server.Server server = new Server.Server(httpListener, moviesRepository);
             server.Start();
         }

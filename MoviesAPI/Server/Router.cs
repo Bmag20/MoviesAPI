@@ -1,5 +1,4 @@
 using System;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 using MoviesAPI.Controller;
 using MoviesAPI.Repository;
@@ -10,10 +9,10 @@ namespace MoviesAPI.Server
     public class Router
     {
         private readonly Request _request;
-        private readonly IMoviesRepository _movieService;
+        private readonly IMoviesService _movieService;
         private ICommand _command;
 
-        public Router(Request request, IMoviesRepository movieService)
+        public Router(Request request, IMoviesService movieService)
         {
             _request = request;
             _movieService = movieService;
@@ -31,7 +30,6 @@ namespace MoviesAPI.Server
             return new Response(404, "Not Found");
         }
 
-        // IControlller??
         private ICommand CreateCommand(MoviesController moviesController)
         {
             return _request.Method switch
@@ -40,7 +38,7 @@ namespace MoviesAPI.Server
                 "POST" => new AddMovieCommand(moviesController),
                 "PUT" => new UpdateMovieCommand(moviesController),
                 "DELETE" => new DeleteMovieCommand(moviesController),
-                _ => new GetMoviesCommand(moviesController) // todo - throw exception
+                _ => throw new Exception("Method not supported")
             };
         }
     }

@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
+using MoviesAPI.Exceptions;
 using MoviesAPI.Repository;
 
 namespace MoviesAPI.Controller
 {
     public class MoviesController
     {
-        private readonly IMoviesRepository _movieService;
+        private readonly IMoviesService _movieService;
 
-        public MoviesController(IMoviesRepository movieService)
+        public MoviesController(IMoviesService movieService)
         {
             _movieService = movieService;
         }
@@ -17,24 +19,48 @@ namespace MoviesAPI.Controller
             return _movieService.GetAllMovies();
         }
 
-        public Movie GetMovieById(int id)
+        public Movie GetMovieById(int movieId)
         {
-            return _movieService.GetMovieById(id);
+            ThrowExceptionIfMovieIdDoesNotExist(movieId);
+            return _movieService.GetMovieById(movieId);
         }
 
-        public int AddMovie(MovieRequest movie)
+        private void ThrowExceptionIfMovieIdDoesNotExist(int movieId)
         {
+            if (_movieService.GetMovieById(movieId) == null)
+            {
+                throw new MovieNotFoundException();
+            }
+        }
+        public int AddMovie(Movie movie)
+        {
+            ThrowExceptionIfMovieNameAlreadyExists(movie.Title);
             return _movieService.AddMovie(movie);
         }
-
-        public Movie UpdateMovie(int movieId, MovieRequest movie)
+        
+        private void ThrowExceptionIfMovieNameAlreadyExists(string movieName)
         {
+            if (IsMovieNameExists(movieName))
+            {
+                throw new MovieAlreadyExistsException();
+            }
+        }
+        private bool IsMovieNameExists(string movieName)
+        {
+            return GetAllMovies().Any(movie => movie.Title == movieName);
+        }
+
+        public Movie UpdateMovie(int movieId, Movie movie)
+        {
+            ThrowExceptionIfMovieIdDoesNotExist(movieId);
+            ThrowExceptionIfMovieNameAlreadyExists(movie.Title);
             _movieService.UpdateMovie(movieId, movie);
             return GetMovieById(movieId);
         }
 
         public void DeleteMovie(int movieId)
         {
+            ThrowExceptionIfMovieIdDoesNotExist(movieId);
             _movieService.DeleteMovie(movieId);
         }
     }
