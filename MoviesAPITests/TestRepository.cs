@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MoviesAPI;
+using MoviesAPI.Controller;
 using MoviesAPI.Repository;
 
 namespace MoviesAPITests

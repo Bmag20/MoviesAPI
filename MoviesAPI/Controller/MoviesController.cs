@@ -34,10 +34,19 @@ namespace MoviesAPI.Controller
         }
         public int AddMovie(Movie movie)
         {
+            ThrowExceptionIfMovieNameIsEmpty(movie.Title);
             ThrowExceptionIfMovieNameAlreadyExists(movie.Title);
             return _movieService.AddMovie(movie);
         }
-        
+
+        private void ThrowExceptionIfMovieNameIsEmpty(string movieName)
+        {
+            if (movieName == "")
+            {
+                throw new MovieNameEmptyException();
+            }
+        }
+
         private void ThrowExceptionIfMovieNameAlreadyExists(string movieName)
         {
             if (IsMovieNameExists(movieName))
@@ -52,6 +61,7 @@ namespace MoviesAPI.Controller
 
         public Movie UpdateMovie(int movieId, Movie movie)
         {
+            ThrowExceptionIfMovieNameIsEmpty(movie.Title);
             ThrowExceptionIfMovieIdDoesNotExist(movieId);
             ThrowExceptionIfMovieNameAlreadyExists(movie.Title);
             _movieService.UpdateMovie(movieId, movie);

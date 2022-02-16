@@ -1,9 +1,10 @@
-using Dapper;
 using System.Collections.Generic;
 using System.Linq;
+using Dapper;
 using Microsoft.Data.Sqlite;
+using MoviesAPI.Repository;
 
-namespace MoviesAPI.Repository
+namespace MoviesAPI.Controller
 {
     public class DapperService : IMoviesService
 

@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using MoviesAPI.Controller;
 using MoviesAPI.Repository;
 
 namespace MoviesAPI.Server

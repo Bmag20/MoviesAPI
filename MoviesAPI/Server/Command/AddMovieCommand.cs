@@ -25,6 +25,10 @@ namespace MoviesAPI.Server.Command
             {
                 return new Response(400, "Bad request - Body is not valid JSON");
             }
+            catch (MovieNameEmptyException)
+            {
+                return new Response(400, "Bad request - Movie name cannot be empty");
+            }
             catch (MovieAlreadyExistsException e)
             {
                 return new Response(409, "Conflict - Movie already exists"); 

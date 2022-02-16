@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MoviesAPI.Repository
+namespace MoviesAPI.Controller
 {
     public interface IMoviesService
     {

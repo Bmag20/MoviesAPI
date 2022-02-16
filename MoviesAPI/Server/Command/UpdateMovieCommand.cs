@@ -17,7 +17,7 @@ namespace MoviesAPI.Server.Command
         public Response Execute(Request request)
         {
             if (!Regex.IsMatch(request.Url, @"movies/\d+"))
-                return new Response(400, "Bad Request - url is not valid");
+                return new Response(404, "Bad Request - url is not valid");
             try
             {
                 if (!int.TryParse(request.segments[2], out int movieId))
@@ -33,6 +33,10 @@ namespace MoviesAPI.Server.Command
             catch (MovieNotFoundException)
             {
                 return new Response(400, "Bad request - Movie id does not exist");
+            }
+            catch (MovieNameEmptyException)
+            {
+                return new Response(400, "Bad request - Movie name cannot be empty");
             }
             catch (MovieAlreadyExistsException)
             {

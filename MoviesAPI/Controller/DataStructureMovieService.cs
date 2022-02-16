@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using MoviesAPI.Repository;
 
-namespace MoviesAPI.Repository
+namespace MoviesAPI.Controller
 {
     public class DataStructureMovieService : IMoviesService
     {

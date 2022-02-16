@@ -28,10 +28,10 @@ namespace MoviesAPI.Server.Command
                 var movie = _controller.GetMovieById(movieId);
                 return new Response(200, JsonSerializer.Serialize(movie));
             }
-            catch (FormatException e)
-            {
-                return new Response(400, "Bad Request - movie id is not a number");
-            }
+            // catch (FormatException e)
+            // {
+            //     return new Response(400, "Bad Request - movie id is not a number");
+            // }
             catch(MovieNotFoundException e)
             {
                 return new Response(400, e.Message);
