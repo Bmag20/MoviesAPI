@@ -21,6 +21,7 @@ namespace MoviesAPI.Server
         {
             _listener.Start();
             Console.WriteLine("Listener started, waiting for requests");
+            Console.WriteLine("App is running" );
             while (true)
             {
                 _context = _listener.GetContext();
